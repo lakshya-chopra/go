@@ -195,6 +195,7 @@ func dial(ctx context.Context, netDialer *net.Dialer, network, addr string, conf
 		c.ServerName = hostname
 		config = c
 	}
+	config.PQSignatureSchemesEnabled = true
 
 	conn := Client(rawConn, config)
 	if err := conn.HandshakeContext(ctx); err != nil {

@@ -1,6 +1,6 @@
 module std
 
-go 1.22
+go 1.21
 
 require (
 	github.com/cloudflare/circl v1.3.8-0.20240208083452-454cfdc0f6c7
