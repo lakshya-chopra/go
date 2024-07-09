@@ -1229,7 +1229,9 @@ func supportedVersionsFromMax(maxVersion uint16) []uint16 {
 	return versions
 }
 
-var defaultCurvePreferences = []CurveID{X25519, CurveP256, CurveP384, CurveP521}
+// add X25519Kyber768 & P256Kyber768
+// now no need to specify this hybrid PQ scheme in the CurvePreferences
+var defaultCurvePreferences = []CurveID{X25519Kyber768Draft00, P256Kyber768Draft00, X25519, CurveP256, CurveP384, CurveP521}
 
 func (c *Config) curvePreferences() []CurveID {
 	if needFIPS() {
