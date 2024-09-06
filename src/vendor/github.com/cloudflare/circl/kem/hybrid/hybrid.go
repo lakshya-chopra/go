@@ -38,6 +38,7 @@ import (
 	"github.com/cloudflare/circl/kem/kyber/kyber1024"
 	"github.com/cloudflare/circl/kem/kyber/kyber512"
 	"github.com/cloudflare/circl/kem/kyber/kyber768"
+	"github.com/cloudflare/circl/kem/mlkem/mlkem768"
 )
 
 var ErrUninitialized = errors.New("public or private key not initialized")
@@ -57,10 +58,21 @@ func Kyber1024X448() kem.Scheme { return kyber1024X }
 // Returns the hybrid KEM of Kyber768Draft00 and P-256.
 func P256Kyber768Draft00() kem.Scheme { return p256Kyber768Draft00 }
 
+// ML-KEM (Pure & Hybrid)
+func MLKEM768() kem.Scheme {return mlkem768.Scheme() }
+func MLKEM768X25519() kem.Scheme   { return mlkem768X }
+func SECP256r1MLKEM768() kem.Scheme { return SecP256r1MLKEM768 }
+
 var p256Kyber768Draft00 kem.Scheme = &scheme{
 	"P256Kyber768Draft00",
 	p256Kem,
 	kyber768.Scheme(),
+}
+
+var SecP256r1MLKEM768 kem.Scheme = &scheme{
+	"SecP256r1MLKEM768",
+	p256Kem,
+	mlkem768.Scheme(),
 }
 
 var kyber512X kem.Scheme = &scheme{
@@ -85,6 +97,12 @@ var kyber1024X kem.Scheme = &scheme{
 	"Kyber1024-X448",
 	x448Kem,
 	kyber1024.Scheme(),
+}
+
+var mlkem768X kem.Scheme = &scheme{
+	"MLKEM768-X25519",
+	x25519Kem,
+	mlkem768.Scheme(),
 }
 
 // Public key of a hybrid KEM.
