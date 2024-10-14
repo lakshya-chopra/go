@@ -46,7 +46,7 @@ var (
 
 	X25519MLKEM768    = CurveID(0x11EC)
 	SecP256r1MLKEM768 = CurveID(0x11EB)
-	MLKEM768 		  = CurveID(0x11ED)
+	MLKEM768          = CurveID(0x11ED)
 
 	invalidCurveID = CurveID(0)
 
@@ -72,10 +72,10 @@ func curveIdToCirclScheme(id CurveID) kem.Scheme {
 		return hybrid.P256Kyber768Draft00()
 
 	case X25519MLKEM768:
-		return hybrid.MLKEM768X25519()
+		return hybrid.X25519MLKEM768()
 	case SecP256r1MLKEM768:
 		return hybrid.SECP256r1MLKEM768()
-	
+
 	case MLKEM768:
 		return hybrid.MLKEM768()
 

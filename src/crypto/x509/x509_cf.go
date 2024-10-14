@@ -6,8 +6,9 @@ import (
 
 	circlPki "github.com/cloudflare/circl/pki"
 	circlSign "github.com/cloudflare/circl/sign"
-	"github.com/cloudflare/circl/sign/eddilithium3"
 	"github.com/cloudflare/circl/sign/eddilithium2"
+	"github.com/cloudflare/circl/sign/eddilithium3"
+	"github.com/cloudflare/circl/sign/mldsa/mldsa65"
 )
 
 // To add a signature scheme from Circl
@@ -22,6 +23,7 @@ var circlSchemes = [...]struct {
 	alg    PublicKeyAlgorithm
 	scheme circlSign.Scheme
 }{
+	{PureMLDSA65, MLDSA65, mldsa65.Scheme()},
 	{PureEdDilithium2, EdDilithium2, eddilithium2.Scheme()},
 	{PureEdDilithium3, EdDilithium3, eddilithium3.Scheme()},
 }

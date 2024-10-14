@@ -8,6 +8,7 @@ import (
 	circlSign "github.com/cloudflare/circl/sign"
 	"github.com/cloudflare/circl/sign/eddilithium2"
 	"github.com/cloudflare/circl/sign/eddilithium3"
+	"github.com/cloudflare/circl/sign/mldsa/mldsa65"
 )
 
 // To add a signature scheme from Circl
@@ -23,6 +24,7 @@ var circlSchemes = [...]struct {
 }{
 	{signatureEdDilithium2, eddilithium2.Scheme()},
 	{signatureEdDilithium3, eddilithium3.Scheme()},
+	{signatureMLDSA, mldsa65.Scheme()},
 }
 
 func circlSchemeBySigType(sigType uint8) circlSign.Scheme {

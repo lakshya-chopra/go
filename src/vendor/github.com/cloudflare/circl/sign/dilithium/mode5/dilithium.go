@@ -1,10 +1,10 @@
 // Code generated from pkg.templ.go. DO NOT EDIT.
 
-// mode2 implements the CRYSTALS-Dilithium signature scheme Dilithium2
+// mode5 implements the CRYSTALS-Dilithium signature scheme Dilithium5
 // as submitted to round3 of the NIST PQC competition and described in
 //
 // https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf
-package mode2
+package mode5
 
 import (
 	"crypto"
@@ -12,7 +12,7 @@ import (
 	"io"
 
 	"github.com/cloudflare/circl/sign"
-	"github.com/cloudflare/circl/sign/dilithium/mode2/internal"
+	"github.com/cloudflare/circl/sign/dilithium/mode5/internal"
 	common "github.com/cloudflare/circl/sign/internal/dilithium"
 )
 
@@ -30,10 +30,10 @@ const (
 	SignatureSize = internal.SignatureSize
 )
 
-// PublicKey is the type of Dilithium2 public key
+// PublicKey is the type of Dilithium5 public key
 type PublicKey internal.PublicKey
 
-// PrivateKey is the type of Dilithium2 private key
+// PrivateKey is the type of Dilithium5 private key
 type PrivateKey internal.PrivateKey
 
 // GenerateKey generates a public/private key pair using entropy from rand.
@@ -122,7 +122,7 @@ func (sk *PrivateKey) MarshalBinary() ([]byte, error) {
 // Unpacks the public key from data.
 func (pk *PublicKey) UnmarshalBinary(data []byte) error {
 	if len(data) != PublicKeySize {
-		return errors.New("packed public key must be of mode2.PublicKeySize bytes")
+		return errors.New("packed public key must be of mode5.PublicKeySize bytes")
 	}
 	var buf [PublicKeySize]byte
 	copy(buf[:], data)
@@ -133,7 +133,7 @@ func (pk *PublicKey) UnmarshalBinary(data []byte) error {
 // Unpacks the private key from data.
 func (sk *PrivateKey) UnmarshalBinary(data []byte) error {
 	if len(data) != PrivateKeySize {
-		return errors.New("packed private key must be of mode2.PrivateKeySize bytes")
+		return errors.New("packed private key must be of mode5.PrivateKeySize bytes")
 	}
 	var buf [PrivateKeySize]byte
 	copy(buf[:], data)
@@ -194,10 +194,10 @@ type scheme struct{}
 
 var sch sign.Scheme = &scheme{}
 
-// Scheme returns a generic signature interface for Dilithium2.
+// Scheme returns a generic signature interface for Dilithium5.
 func Scheme() sign.Scheme { return sch }
 
-func (*scheme) Name() string        { return "Dilithium2" }
+func (*scheme) Name() string        { return "Dilithium5" }
 func (*scheme) PublicKeySize() int  { return PublicKeySize }
 func (*scheme) PrivateKeySize() int { return PrivateKeySize }
 func (*scheme) SignatureSize() int  { return SignatureSize }

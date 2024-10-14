@@ -192,6 +192,7 @@ const (
 	signatureEd25519
 	signatureEdDilithium2
 	signatureEdDilithium3
+	signatureMLDSA
 )
 
 // directSigning is a standard Hash value that signals that no pre-hashing

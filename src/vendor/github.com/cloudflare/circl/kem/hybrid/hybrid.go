@@ -1,13 +1,13 @@
-// Package hybrid defines several hybrid classical/quantum KEMs.
+// Package hybrid defines several hybrid classical/quantum KEMs for use in TLS.
 //
-// KEMs are combined by simple concatenation of shared secrets, cipher texts,
-// public keys, etc, see
+// Hybrid KEMs in TLS are created by simple concatenation
+// of shared secrets, cipher texts, public keys, etc.
+// This is safe for TLS, see eg.
 //
 //	https://datatracker.ietf.org/doc/draft-ietf-tls-hybrid-design/
 //	https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Cr2.pdf
 //
-// Note that this is only fine if the shared secret is used in its entirety
-// in a next step, such as being hashed or used as key.
+// Note that this approach is not proven secure in broader context.
 //
 // For deriving a KEM keypair deterministically and encapsulating
 // deterministically, we expand a single seed to both using SHAKE256,
@@ -58,21 +58,24 @@ func Kyber1024X448() kem.Scheme { return kyber1024X }
 // Returns the hybrid KEM of Kyber768Draft00 and P-256.
 func P256Kyber768Draft00() kem.Scheme { return p256Kyber768Draft00 }
 
-// ML-KEM (Pure & Hybrid)
-func MLKEM768() kem.Scheme {return mlkem768.Scheme() }
-func MLKEM768X25519() kem.Scheme   { return mlkem768X }
+// Returns the hybrid KEM of ML-KEM-768 and X25519.
+// https://www.ietf.org/archive/id/draft-kwiatkowski-tls-ecdhe-mlkem-01.html
+func X25519MLKEM768() kem.Scheme { return xmlkem768 }
+
+func MLKEM768() kem.Scheme { return mlkem768.Scheme() }
 func SECP256r1MLKEM768() kem.Scheme { return SecP256r1MLKEM768 }
 
-var p256Kyber768Draft00 kem.Scheme = &scheme{
-	"P256Kyber768Draft00",
-	p256Kem,
-	kyber768.Scheme(),
-}
 
 var SecP256r1MLKEM768 kem.Scheme = &scheme{
 	"SecP256r1MLKEM768",
 	p256Kem,
 	mlkem768.Scheme(),
+}
+
+var p256Kyber768Draft00 kem.Scheme = &scheme{
+	"P256Kyber768Draft00",
+	p256Kem,
+	kyber768.Scheme(),
 }
 
 var kyber512X kem.Scheme = &scheme{
@@ -99,10 +102,10 @@ var kyber1024X kem.Scheme = &scheme{
 	kyber1024.Scheme(),
 }
 
-var mlkem768X kem.Scheme = &scheme{
-	"MLKEM768-X25519",
-	x25519Kem,
+var xmlkem768 kem.Scheme = &scheme{
+	"X25519MLKEM768",
 	mlkem768.Scheme(),
+	x25519Kem,
 }
 
 // Public key of a hybrid KEM.
