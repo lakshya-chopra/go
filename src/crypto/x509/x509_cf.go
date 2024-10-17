@@ -9,6 +9,8 @@ import (
 	"github.com/cloudflare/circl/sign/eddilithium2"
 	"github.com/cloudflare/circl/sign/eddilithium3"
 	"github.com/cloudflare/circl/sign/mldsa/mldsa65"
+	"github.com/cloudflare/circl/sign/dilithium/mode3"
+
 )
 
 // To add a signature scheme from Circl
@@ -26,6 +28,7 @@ var circlSchemes = [...]struct {
 	{PureMLDSA65, MLDSA65, mldsa65.Scheme()},
 	{PureEdDilithium2, EdDilithium2, eddilithium2.Scheme()},
 	{PureEdDilithium3, EdDilithium3, eddilithium3.Scheme()},
+	{PureDilithium3, Dilithium3, mode3.Scheme()},
 }
 
 func CirclSchemeByPublicKeyAlgorithm(alg PublicKeyAlgorithm) circlSign.Scheme {

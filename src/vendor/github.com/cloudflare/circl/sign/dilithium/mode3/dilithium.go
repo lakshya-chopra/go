@@ -8,6 +8,7 @@ package mode3
 
 import (
 	"crypto"
+	"encoding/asn1"
 	"errors"
 	"io"
 
@@ -202,6 +203,10 @@ func (*scheme) PublicKeySize() int  { return PublicKeySize }
 func (*scheme) PrivateKeySize() int { return PrivateKeySize }
 func (*scheme) SignatureSize() int  { return SignatureSize }
 func (*scheme) SeedSize() int       { return SeedSize }
+func (*scheme) TLSIdentifier() uint { return 0xfed2 }
+func (*scheme) Oid() asn1.ObjectIdentifier {
+	return asn1.ObjectIdentifier{1,3,6,1,4,1,2,267,7,6,5}
+}
 
 // TODO TLSIdentifier() and OID()
 

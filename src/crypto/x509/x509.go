@@ -244,6 +244,7 @@ const (
 	PureEdDilithium2
 	PureEdDilithium3
 	PureMLDSA65
+	PureDilithium3
 )
 
 func (algo SignatureAlgorithm) isRSAPSS() bool {
@@ -275,6 +276,7 @@ const (
 	EdDilithium2
 	EdDilithium3
 	MLDSA65
+	Dilithium3
 )
 
 var publicKeyAlgoName = [...]string{
@@ -285,6 +287,7 @@ var publicKeyAlgoName = [...]string{
 	EdDilithium2: "Ed25519-Dilithium2",
 	EdDilithium3: "Ed448-Dilithium3",
 	MLDSA65:      "ML-DSA65",
+	Dilithium3: "Dilithium3",
 }
 
 func (algo PublicKeyAlgorithm) String() string {
