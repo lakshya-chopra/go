@@ -6,6 +6,7 @@
 //	Ed448
 //	Ed25519-Dilithium2
 //	Ed448-Dilithium3
+// ML-DSA65
 package schemes
 
 import (

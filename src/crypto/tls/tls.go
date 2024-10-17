@@ -63,6 +63,7 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
+	"log"
 	"net"
 	"os"
 	"strings"
@@ -395,7 +396,11 @@ func parsePrivateKey(der []byte) (crypto.PrivateKey, error) {
 	if key, err := x509.ParsePKCS1PrivateKey(der); err == nil {
 		return key, nil
 	}
-	if key, err := x509.ParsePKCS8PrivateKey(der); err == nil {
+	key, err := x509.ParsePKCS8PrivateKey(der)
+	if err != nil {
+		log.Println(err)
+	} else {
+		log.Println("Parsing PKCS8 key")
 		switch key := key.(type) {
 		case *rsa.PrivateKey, *ecdsa.PrivateKey, ed25519.PrivateKey, circlSign.PrivateKey:
 			return key, nil
