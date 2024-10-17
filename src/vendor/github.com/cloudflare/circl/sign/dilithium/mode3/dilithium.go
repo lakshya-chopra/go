@@ -10,6 +10,7 @@ import (
 	"crypto"
 	"encoding/asn1"
 	"errors"
+	"fmt"
 	"io"
 
 	"github.com/cloudflare/circl/sign"
@@ -278,6 +279,7 @@ func (*scheme) UnmarshalBinaryPublicKey(buf []byte) (sign.PublicKey, error) {
 
 func (*scheme) UnmarshalBinaryPrivateKey(buf []byte) (sign.PrivateKey, error) {
 	if len(buf) != PrivateKeySize {
+		fmt.Printf("PrivateKeySize : %d\nLength provided: %d\n",PrivateKeySize,len(buf))
 		return nil, sign.ErrPrivKeySize
 	}
 
